@@ -58,7 +58,7 @@ class RLProblem:
 
     # The actual learning process.
     # Using q Updates the policy of the agent get's further an further refined
-    def qUpdate(self, steps, initialState, cutoff):
+    def qUpdate(self, steps, initialState, falloff):
         state = initialState
         while steps > 0:
             steps -= 1
@@ -68,7 +68,7 @@ class RLProblem:
             if nextState == None:
                 return
 
-            self.heuristic[state][action] = cutoff*reward + (1-cutoff)*maxValue(self.heuristic[nextState])
+            self.heuristic[state][action] = falloff*reward + (1-falloff)*maxValue(self.heuristic[nextState])
             state = nextState
 
     # returns the policy aquired via reinforcement learning.
