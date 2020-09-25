@@ -58,7 +58,11 @@ class RLProblem:
 
     # The actual learning process.
     # Using q Updates the policy of the agent get's further an further refined
-    def qUpdate(self, steps, initialState, falloff):
+    # initialState will be chosen at random, if it's set to None (default)
+    def qUpdate(self, falloff, steps = 16, initialState = None):
+        if initialState == None:
+            initialState = randomElement(self.states)
+
         state = initialState
         while steps > 0:
             steps -= 1
